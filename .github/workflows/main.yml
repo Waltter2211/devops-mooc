@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - name: Login to docker
         uses: docker/login-action@v1
         with:
@@ -21,3 +20,9 @@ jobs:
         with:
           push: true
           tags: waltter2211/express-app:latest
+      - name: Deploy to render
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
+          wait-for-success: true
